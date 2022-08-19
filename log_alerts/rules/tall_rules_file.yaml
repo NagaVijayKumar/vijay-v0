@@ -1,0 +1,184 @@
+alert_params:
+  "500_failure":
+    alert_subject: "500 in Activation/ Login/ Reset Password/ Logout - FreshID Vady2"
+    type: any
+    index: freshidd*
+    realert:
+      minutes: 0
+    aggregation:
+      minutes: 2
+    aggregation_key: "hosta"
+    filter:
+      - query:
+          query_string:
+            query: '(host: byjusclasses.freshworks.com OR westconemea.freshworks.com) AND (path: \/api\/v2\/login OR \/oauth\/token OR \/oauth\/authorize OR \/api\/v2\/users\/-\/hashes\/*\/activate OR \/api\/v2\/users\/reset-password OR \/api\/v2\/users\/-\/hashes\/*\/reset-password OR \/api\/v2\/logout) AND (status: 500) AND (kubernetes.container.name: nginx-ingress-controller)'
+    include: ["message", "product", "host", "group", "name", "cloud.region"]
+    alerta_tags: ["host={host}"]
+    alerta_severity: critical
+    alerta_environment: freshid
+    #Test3PR Branch changes
+
+  "activation_failure_403_408_499_502_503_504":
+    alert_subject: "User Activation - 403/408/499/502/503/504 - FreshID V2"
+    type: any
+    index: freshid*
+    realert:
+      minutes: 0
+    aggregation:
+      minutes: 1
+    aggregation_key: "host"
+    filter:
+      - query:
+          query_string:
+            query: '(host: byjusclasses.freshworks.com OR westconemea.freshworks.com) AND (path: \/api\/v2\/users\/-\/hashes\/*\/activate) AND (status: 403 OR 408 OR 499 OR 502 OR 503 OR 504) AND (kubernetes.container.name: nginx-ingress-controller)'
+    include: ["message", "product", "host", "group", "name", "cloud.region"]
+    alerta_tags: ["host={host}"]
+    alerta_severity: critical
+    alerta_environment: freshid
+
+  "login_failure_502_503_504":
+    alert_subject: "Login 502/503/504 - FreshID V2"
+    type: frequency
+    index: freshid*
+    num_events: 5
+    timeframe:
+      minutes: 1
+    use_count_query: true
+    top_count_keys: ["host","status","path","cloud.region"]
+    raw_count_keys: false
+    realert:
+      minutes: 0
+    query_key: host
+    filter:
+      - query:
+          query_string:
+            query: '(host: byjusclasses.freshworks.com OR westconemea.freshworks.com) AND (path: \/api\/v2\/login OR \/oauth\/token OR \/oauth\/authorize) AND (status: 502 OR 503 OR 504) AND (kubernetes.container.name: nginx-ingress-controller)'
+    alerta_tags: []
+    alerta_severity: critical
+    alerta_environment: freshid
+    labels : 
+      -Hello: HelloValue
+      -hi: hiValue
+
+  "login_failure_403_408_499":
+    alert_subject: "Login 403/408/499 - FreshID V2"
+    type: frequency
+    index: freshid*
+    num_events: 10
+    timeframe:
+      minutes: 1
+    use_count_query: true
+    top_count_keys: ["host","status","path","cloud.region"]
+    raw_count_keys: false
+    realert:
+      minutes: 0
+    query_key: host
+    filter:
+      - query:
+          query_string:
+            query: '(host: byjusclasses.freshworks.com OR westconemea.freshworks.com) AND (path: \/api\/v2\/login OR \/oauth\/token OR \/oauth\/authorize) AND (status: 403 OR 408 OR 499) AND (kubernetes.container.name: nginx-ingress-controller)'
+    alerta_tags: []
+    alerta_severity: critical
+    alerta_environment: freshid
+
+  "reset_password_failure_502_503_504":
+    alert_subject: "Reset Password -  502/503/504 - FreshID V2"
+    type: frequency
+    index: freshid*
+    num_events: 5
+    timeframe:
+      minutes: 1
+    use_count_query: true
+    top_count_keys: ["host","status","path","cloud.region"]
+    raw_count_keys: false
+    realert:
+      minutes: 0
+    query_key: host
+    filter:
+      - query:
+          query_string:
+            query: '(host: byjusclasses.freshworks.com OR westconemea.freshworks.com) AND (path: \/api\/v2\/users\/reset-password OR \/api\/v2\/users\/-\/hashes\/*\/reset-password) AND (status: 502 OR 503 OR 504) AND (kubernetes.container.name: nginx-ingress-controller)'
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+
+  "reset_password_failure_403_408_499":
+    alert_subject: "Reset Password - 403/408/499 - FreshID V2"
+    type: frequency
+    index: freshid*
+    num_events: 10
+    timeframe:
+      minutes: 1
+    use_count_query: true
+    top_count_keys: ["host","status","path","cloud.region"]
+    raw_count_keys: false
+    realert:
+      minutes: 0
+    query_key: host
+    filter:
+      - query:
+          query_string:
+            query: '(host: byjusclasses.freshworks.com OR westconemea.freshworks.com) AND (path: \/api\/v2\/users\/reset-password OR \/api\/v2\/users\/-\/hashes\/*\/reset-password) AND (status: 403 OR 408 OR 499) AND (kubernetes.container.name: nginx-ingress-controller)'
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+
+  "session_logout_failure_404_org_domain_change":
+    alert_subject: "404 in session/logout - Organization domain change - FreshID V2"
+    type: frequency
+    index: freshid*
+    num_events: 5
+    timeframe:
+      minutes: 1
+    use_count_query: true
+    top_count_keys: ["path","cloud.region"]
+    raw_count_keys: false
+    realert:
+      minutes: 0
+    query_key: host
+    filter:
+      - query:
+          query_string:
+            query: '(host: byjusclasses.freshworks.com OR westconemea.freshworks.com) AND (path: \/api\/v2\/logout OR \/api\/v2\/session) AND (status: 404) AND (kubernetes.container.name: nginx-ingress-controller)'
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+  "critical_admin_supervisor_us":
+    type: flatline
+    index: freshdesk*
+    region: us-east-1
+    threshold: 60
+    timeframe:
+      minutes: 60
+    query_delay:
+      minutes: 5
+    use_count_query: true
+    filter:
+    - query:
+        query_string:
+          query: '(name:"sidekiq" AND group:"sidekiq" AND wc:"Admin::SupervisorWorker")'
+    alert_subject: "[US] Paid supervisor not running"
+    alerta_environment: freshdesk
+    alerta_severity: critical
+    priority: 1
+    include: ["wc", "q"]
+
+  "admin_supervisor_us":
+    type: flatline
+    index: freshdesk*
+    region: us-east-1
+    threshold: 11170
+    timeframe:
+      minutes: 60
+    query_delay:
+      minutes: 5
+    use_count_query: true
+    filter:
+    - query:
+        query_string:
+          query: '(name:"sidekiq" AND group:"sidekiq" AND wc:"Admin::SupervisorWorker")'
+    alert_subject: "[US] Dip in paid supervisor"
+    alerta_environment: freshdesk
+    alerta_severity: major
+    priority: 1
+    include: ["wc", "q"]
