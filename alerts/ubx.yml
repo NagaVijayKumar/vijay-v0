@@ -1,0 +1,264 @@
+alert_params:
+  "ubxfcaller_fwcrm":
+    type: any
+    index: ubx*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:wallstreet-consumer-blue) AND "https://fcaller-billing.freshcaller.com/ubx/billing/callback. Response Status Code :" AND ( NOT ("https://fcaller-billing.freshcaller.com/ubx/billing/callback. Response Status Code : 200" OR "https://fcaller-billing.freshcaller.com/ubx/billing/callback. Response Status Code : 201"))'
+    alert_subject: "FWCRM UBX Callback Failure Product : Freshcaller"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: ubx
+
+  "ubxfchat_fwcrm":
+    type: any
+    index: ubx*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:wallstreet-consumer-blue) AND "https://api.freshchat.com/v2/billing/callback. Response Status Code :" AND ( NOT ("https://api.freshchat.com/v2/billing/callback. Response Status Code : 200" OR "https://api.freshchat.com/v2/billing/callback. Response Status Code : 201"))'
+    alert_subject: "FWCRM UBX Callback Failure Product : Freshchat"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: ubx
+
+  "ubxfmarketer_fwcrm":
+    type: any
+    index: ubx*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:wallstreet-consumer-blue) AND "https://app.freshmarketer.com/accounts/api/v1/billing/callback. Response Status Code :" AND ( NOT ("https://app.freshmarketer.com/accounts/api/v1/billing/callback. Response Status Code : 200" OR "https://app.freshmarketer.com/accounts/api/v1/billing/callback. Response Status Code : 201"))'
+    alert_subject: "FWCRM UBX Callback Failure Product : Freshmarketer"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: ubx
+
+  "ubxfsales_fwcrm":
+    type: any
+    index: ubx*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:wallstreet-consumer-blue) AND "https://login.freshsales.io/_api/v1/billing/callback. Response Status Code :" AND ( NOT ("https://login.freshsales.io/_api/v1/billing/callback. Response Status Code : 200" OR "https://login.freshsales.io/_api/v1/billing/callback. Response Status Code : 201"))'
+    alert_subject: "FWCRM UBX Callback Failure Product : Freshsales"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: ubx
+
+
+# EU Region
+
+  "ubxfcallereu_fwcrm":
+    type: any
+    index: ubx*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:wallstreet-consumer-blue) AND "https://fcaller-billing-euc.freshcaller.com/ubx/billing/callback. Response Status Code :" AND ( NOT ("https://fcaller-billing-euc.freshcaller.com/ubx/billing/callback. Response Status Code : 200" OR "https://fcaller-billing-euc.freshcaller.com/ubx/billing/callback. Response Status Code : 201"))'
+    alert_subject: "FWCRM UBX Callback Failure Product : Freshcaller"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: ubx
+
+  "ubxfchateu_fwcrm":
+    type: any
+    index: ubx*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:wallstreet-consumer-blue) AND "https://api.eu.freshchat.com/v2/billing/callback. Response Status Code :" AND ( NOT ("https://api.eu.freshchat.com/v2/billing/callback. Response Status Code : 200" OR "https://api.eu.freshchat.com/v2/billing/callback. Response Status Code : 201"))'
+    alert_subject: "FWCRM UBX Callback Failure Product : Freshchat"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: ubx
+
+  "ubxfmarketereu_fwcrm":
+    type: any
+    index: ubx*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:wallstreet-consumer-blue) AND "https://app-euc.freshmarketer.com/accounts/api/v1/billing/callback. Response Status Code :" AND ( NOT ("https://app-euc.freshmarketer.com/accounts/api/v1/billing/callback. Response Status Code : 200" OR "https://app-euc.freshmarketer.com/accounts/api/v1/billing/callback. Response Status Code : 201"))'
+    alert_subject: "FWCRM UBX Callback Failure Product : Freshmarketer"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: ubx
+
+  "ubxfsaleseu_fwcrm":
+    type: any
+    index: ubx*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:wallstreet-consumer-blue) AND "https://login-euc.freshsales.io/_api/v1/billing/callback. Response Status Code :" AND ( NOT ("https://login-euc.freshsales.io/_api/v1/billing/callback. Response Status Code : 200" OR "https://login-euc.freshsales.io/_api/v1/billing/callback. Response Status Code : 201"))'
+    alert_subject: "FWCRM UBX Callback Failure Product : Freshsales"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: ubx
+
+# AU Region
+
+  "ubxfcallerau_fwcrm":
+    type: any
+    index: ubx*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:wallstreet-consumer-blue) AND "https://fcaller-billing-au.freshcaller.com/ubx/billing/callback. Response Status Code :" AND ( NOT ("https://fcaller-billing-au.freshcaller.com/ubx/billing/callback. Response Status Code : 200" OR "https://fcaller-billing-au.freshcaller.com/ubx/billing/callback. Response Status Code : 201"))'
+    alert_subject: "FWCRM UBX Callback Failure Product : Freshcaller"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: ubx
+
+  "ubxfchatau_fwcrm":
+    type: any
+    index: ubx*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:wallstreet-consumer-blue) AND "https://api.au.freshchat.com/v2/billing/callback. Response Status Code :" AND ( NOT ("https://api.au.freshchat.com/v2/billing/callback. Response Status Code : 200" OR "https://api.au.freshchat.com/v2/billing/callback. Response Status Code : 201"))'
+    alert_subject: "FWCRM UBX Callback Failure Product : Freshchat"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: ubx
+
+  "ubxfmarketerau_fwcrm":
+    type: any
+    index: ubx*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:wallstreet-consumer-blue) AND "https://app-aus.freshmarketer.com/accounts/api/v1/billing/callback. Response Status Code :" AND ( NOT ("https://app-aus.freshmarketer.com/accounts/api/v1/billing/callback. Response Status Code : 200" OR "https://app-aus.freshmarketer.com/accounts/api/v1/billing/callback. Response Status Code : 201"))'
+    alert_subject: "FWCRM UBX Callback Failure Product : Freshmarketer"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: ubx
+
+  "ubxfsalesau_fwcrm":
+    type: any
+    index: ubx*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:wallstreet-consumer-blue) AND "https://login-aus.freshsales.io/_api/v1/billing/callback. Response Status Code :" AND ( NOT ("https://login-aus.freshsales.io/_api/v1/billing/callback. Response Status Code : 200" OR "https://login-aus.freshsales.io/_api/v1/billing/callback. Response Status Code : 201"))'
+    alert_subject: "FWCRM UBX Callback Failure Product : Freshsales"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: ubx
+
+
+# IN Region
+
+  "ubxfcallerin_fwcrm":
+    type: any
+    index: ubx*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:wallstreet-consumer-blue) AND "https://fcaller-billing-in.freshcaller.com/ubx/billing/callback. Response Status Code :" AND ( NOT ("https://fcaller-billing-in.freshcaller.com/ubx/billing/callback. Response Status Code : 200" OR "https://fcaller-billing-in.freshcaller.com/ubx/billing/callback. Response Status Code : 201"))'
+    alert_subject: "FWCRM UBX Callback Failure Product : Freshcaller"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: ubx
+
+  "ubxfchatin_fwcrm":
+    type: any
+    index: ubx*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:wallstreet-consumer-blue) AND "https://api.in.freshchat.com/v2/billing/callback. Response Status Code :" AND ( NOT ("https://api.in.freshchat.com/v2/billing/callback. Response Status Code : 200" OR "https://api.in.freshchat.com/v2/billing/callback. Response Status Code : 201"))'
+    alert_subject: "FWCRM UBX Callback Failure Product : Freshchat"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: ubx
+
+  "ubxfmarketerin_fwcrm":
+    type: any
+    index: ubx*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:wallstreet-consumer-blue) AND "https://app-ind.freshmarketer.com/accounts/api/v1/billing/callback. Response Status Code :" AND ( NOT ("https://app-ind.freshmarketer.com/accounts/api/v1/billing/callback. Response Status Code : 200" OR "https://app-ind.freshmarketer.com/accounts/api/v1/billing/callback. Response Status Code : 201"))'
+    alert_subject: "FWCRM UBX Callback Failure Product : Freshmarketer"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: ubx
+
+  "ubxfsalesin_fwcrm":
+    type: any
+    index: ubx*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:wallstreet-consumer-blue) AND "https://login-ind.freshsales.io/_api/v1/billing/callback. Response Status Code :" AND ( NOT ("https://login-ind.freshsales.io/_api/v1/billing/callback. Response Status Code : 200" OR "https://login-ind.freshsales.io/_api/v1/billing/callback. Response Status Code : 201"))'
+    alert_subject: "FWCRM UBX Callback Failure Product : Freshsales"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: ubx

@@ -1,0 +1,160 @@
+alert_params:
+  "errors":
+    type: any
+    index: lego*
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: 'level:"ERROR" NOT _exists_: tags'
+    alert_subject: Error occurred
+    alerta_severity: warning
+    alerta_environment: lego
+    include: ["product", "name", "p", "s", "pt", "traceId", "lgr", "tags", "msg", "message"]
+
+  "datastore_error":
+    type: any
+    index: lego*
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: 'level:"ERROR" AND tags:"[\"DATASTORE_ERROR\"]"'
+    alert_subject: DATASTORE_ERROR occurred
+    alerta_severity: warning
+    alerta_environment: lego
+    include: ["product", "name", "p", "s", "pt", "traceId", "lgr", "tags", "msg", "message"]
+
+  "gdpr_error":
+    type: any
+    index: lego*
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: 'level:"ERROR" AND tags:"[\"GDPR\"]"'
+    alert_subject: GDPR_ERROR occurred
+    alerta_severity: warning
+    alerta_environment: lego
+    include: ["product", "name", "p", "s", "pt", "traceId", "lgr", "tags", "msg", "message"]
+
+  "background_worker_error":
+    type: any
+    index: lego*
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: 'level:"ERROR" AND tags:"[\"BACKGROUND_WORKER\"]"'
+    alert_subject: BACKGROUND_WORKER_ERROR occurred
+    alerta_severity: warning
+    alerta_environment: lego
+    include: ["product", "name", "p", "s", "pt", "traceId", "lgr", "tags", "msg", "message"]
+
+  "central_publish_worker_error":
+    type: any
+    index: lego*
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: 'level:"ERROR" AND tags:"[\"CENTRAL_PUBLISH_WORKER\"]"'
+    alert_subject: CENTRAL_PUBLISH_WORKER_ERROR occurred
+    alerta_severity: warning
+    alerta_environment: lego
+    include: ["product", "name", "p", "s", "pt", "traceId", "lgr", "tags", "msg", "message"]
+
+  "roundrobin_shard_selection_error":
+    type: any
+    index: lego*
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: 'level:"ERROR" AND tags:"[\"REDIS_ERROR\"]"'
+    alert_subject: ROUNDROBIN_SHARD_SELECTION_ERROR occurred
+    alerta_severity: warning
+    alerta_environment: lego
+    include: ["product", "name", "p", "s", "pt", "traceId", "lgr", "tags", "msg", "message"]
+
+  "errors_crossed_threshold":
+    type: frequency
+    num_events: 50
+    index: lego*
+    use_count_query: true
+    top_count_keys:
+      - product
+      - name
+    filter:
+      - query:
+          query_string:
+            query: 'level:"ERROR"'
+    alert_subject: Errors have crossed the threshold
+    timeframe:
+      minutes: 5
+    alerta_severity: critical
+    alerta_environment: lego
+    include: ["product", "name"]
+
+  "webserver_inactivity":
+    type: flatline
+    index: lego*
+    threshold: 1
+    alert_subject: "webserver inactive in last hour"
+    timeframe:
+      hours: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: application_delight_events AND message : \"type=app\""
+    alerta_severity: major
+    alerta_environment: lego
+    use_count_query: true
+    top_count_keys:
+      - product
+    forget_keys: true
+    include: ["product"]
+
+  "bgservices_inactivity":
+    type: flatline
+    index: lego*
+    threshold: 1
+    alert_subject: "bgservices inactive in last four hours"
+    timeframe:
+      hours: 4
+    filter:
+    - query:
+        query_string:
+           query: "name: application_delight_events AND message : \"type=bg\""
+    alerta_severity: major
+    alerta_environment: lego
+    use_count_query: true
+    top_count_keys:
+      - product
+    forget_keys: true
+    include: ["product"]
+
+  "gdpr_inactivity":
+    type: flatline
+    index: lego*
+    threshold: 1
+    alert_subject: "gdpr inactive in last one week"
+    timeframe:
+      days: 7
+    filter:
+    - query:
+        query_string:
+           query: "name: gdpr"
+    alerta_severity: major
+    alerta_environment: lego
+    use_count_query: true
+    top_count_keys:
+      - product
+    forget_keys: true
+    include: ["product"]

@@ -1,0 +1,176 @@
+alert_params:
+  "backend_errors":  #would make it generic for all backend types
+    type: any
+    index: staging-freshworks-edge*
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: kubernetes.container.name:"treasurer" AND level:"ERROR" AND message:stack
+    alert_subject: ""
+    alerta_environment: staging-freshworks-edge
+    include:
+      - kubernetes.container.name
+      - kubernetes.namespace
+      - cloud.region
+      - time
+      - level
+      - lgr
+      - thread
+      - msg
+      - stack
+  "discovery_errors":
+    type: any
+    index: staging-freshworks-edge*
+    aggregation:
+      minutes: 5
+    filter:
+      - query:
+          query_string:
+            query: kubernetes.container.name:"discovery" AND level:"error"
+    alert_subject: "discovery_errors"
+    alerta_environment: staging-freshworks-edge
+    include:
+      - kubernetes.container.name
+      - kubernetes.namespace
+      - cloud.region
+      - time
+      - level
+      - msg
+      - error
+      - k8s-cluster
+  "fcm_api_errors":
+    type: any
+    index: staging-freshworks-edge*
+    aggregation:
+      minutes: 5
+    filter:
+      - query:
+          query_string:
+            query: kubernetes.container.name:"fcm-api" AND level:"ERROR"
+    alert_subject: "fcm_api_errors"
+    alerta_environment: staging-freshworks-edge
+    include:
+      - kubernetes.container.name
+      - kubernetes.namespace
+      - cloud.region
+      - time
+      - level
+      - lgr
+      - thread
+      - msg
+      - stack
+  "fcm_worker_errors":
+    type: any
+    index: staging-freshworks-edge*
+    aggregation:
+      minutes: 5
+    filter:
+      - query:
+          query_string:
+            query: kubernetes.container.name:"fcm-worker" AND level:"ERROR"
+    alert_subject: "fcm_worker_errors"
+    alerta_environment: staging-freshworks-edge
+    include:
+      - kubernetes.container.name
+      - kubernetes.namespace
+      - cloud.region
+      - time
+      - level
+      - lgr
+      - thread
+      - msg
+      - stack
+  "fcm_le_errors":
+    type: any
+    index: staging-freshworks-edge*
+    aggregation:
+      minutes: 5
+    filter:
+      - query:
+          query_string:
+            query: kubernetes.container.name:"fcm-letsencrypt" AND level:"ERROR"
+    alert_subject: "fcm_le_errors"
+    alerta_environment: staging-freshworks-edge
+    include:
+      - kubernetes.container.name
+      - kubernetes.namespace
+      - cloud.region
+      - time
+      - level
+      - msg
+      - tag
+#      - stacktrace
+  "keda_errors":
+    type: any
+    index: staging-freshworks-edge*
+    aggregation:
+      minutes: 5
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:"keda-operator" OR kubernetes.container.name:"keda-metrics-apiserver") AND (message:\"error\"= AND NOT message:"http2: stream closed")'
+    alert_subject: "keda_errors"
+    alerta_environment: staging-freshworks-edge
+    include:
+      - kubernetes.container.name
+      - kubernetes.namespace
+      - cloud.region
+      - time
+      - level
+      - msg
+      - error
+      - k8s-cluster
+  "backend_golang_errors":
+    type: any
+    index: staging-freshworks-edge*
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: kubernetes.container.name:"treasurer" AND level:"error" AND _exists_:ts AND NOT message:canceled
+    alert_subject: "Treasurer golang backend errors (staging)"
+    alerta_environment: staging-freshworks-edge
+    include:
+      - kubernetes.container.name
+      - kubernetes.namespace
+      - cloud.region
+      - "@timestamp"
+      - level
+      - msg
+      - stacktrace
+  "external_secrets_errors":
+    type: frequency
+    index: staging-freshworks-edge*
+    num_events: 5
+    timeframe: 
+      minutes: 5
+    filter:
+      - query:
+          query_string:
+            query: kubernetes.container.name:"external-secrets" AND message:"ERROR"
+    alert_subject: "external_secrets_errors"
+    alerta_environment: staging-freshworks-edge
+    include:
+      - kubernetes.container.name
+      - kubernetes.namespace
+      - cloud.region
+      - time
+      - level
+      - msg
+      - error
+      - k8s-cluster
+
+#    alert_subject: "[{0}] Error occurred for {1} in {2} at {3}"
+#    alert_subject_args:
+#      - kubernetes.container.name
+#      - kubernetes.namespace
+#      - cloud.region
+#      - time
+#    alert_missing_value: ""
+#    alerta_severity: major
+#    alerta_text: |
+#    {time} {level} {lgr} [{thread}] {msg}
+#    {stack}

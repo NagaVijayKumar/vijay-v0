@@ -1,0 +1,51 @@
+alert_params:
+  "wait_queue_consumer_error":
+    type: frequency
+    num_events: 20
+    index: freshcaller*
+    alert_subject: 'Noticed exceptions in wait queue consumer'
+    filter:
+      - query:
+           query_string:
+              query: "\"Exception when processing kafka message\""
+    alerta_severity: critical
+    timeframe:
+      minutes: 5
+    use_count_query: true
+    top_count_keys: ["product", "host", "layer", "group", "name"]
+    raw_count_keys: false
+    alerta_environment: freshcaller
+
+  "kafka_connectivity_error":
+    type: frequency
+    num_events: 20
+    index: freshcaller*
+    alert_subject: 'Noticed errors in kafka connectivity'
+    filter:
+      - query:
+           query_string:
+              query: "(name: kafka_log AND message: ERROR AND NOT message: RebalanceInProgress) OR message: \"Kafka message delay crossed threshold\""
+    alerta_severity: critical
+    timeframe:
+      minutes: 5
+    use_count_query: true
+    top_count_keys: ["product", "host", "layer", "group", "name"]
+    raw_count_keys: false
+    alerta_environment: freshcaller
+
+  "mysql_error":
+    type: frequency
+    num_events: 50
+    index: freshcaller*
+    alert_subject: 'Noticed errors in mysql queries'
+    filter:
+      - query:
+           query_string:
+              query: "message: \"Mysql2::Error\" AND NOT message: \"Duplicate entry\""
+    alerta_severity: critical
+    timeframe:
+      minutes: 10
+    use_count_query: true
+    top_count_keys: ["product", "host", "layer", "group", "name"]    
+    raw_count_keys: false
+    alerta_environment: freshcaller

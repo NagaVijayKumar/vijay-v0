@@ -1,0 +1,18 @@
+alert_params:
+  "server_errors_freddy_qna":
+    type: any
+    num_events: 1
+    index: fd-freddy*
+    realert:
+      minutes: 0
+    aggregation:
+      minutes: 1
+    aggregation_key: "host"
+    filter:
+      - query:
+          query_string:
+            query: "kubernetes.namespace:freddy-qna-us-prod AND (message: ERROR OR message: Exception) AND NOT (message: account_id AND message: \"doesnt exists in the es\")"
+    alert_subject: Error occurred
+    alerta_severity: warning
+    alerta_environment: fd-freddy
+    include: ["product","host","message"]

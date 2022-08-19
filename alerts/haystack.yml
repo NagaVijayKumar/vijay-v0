@@ -1,0 +1,35 @@
+alert_params:
+  "influx_500":
+    type: frequency
+    num_events: 15
+    index: haystack*
+    top_count_keys:
+    - method
+    use_count_query: true
+    filter:
+      - query:
+           query_string:
+              query: '"msg":"[500] - \"timeout\""'
+    alert_subject: 'noticed 500 timeout on influx node'
+    alerta_severity: critical
+    timeframe:
+        minutes: 1
+    include: ["message", "product","host","group", "name"]
+    alerta_environment: haystack
+  "rum_metrics_indexing_error":
+    type: any
+    index: haystack*
+    realert:
+      minutes: 1
+    aggregation:
+      minutes: 5
+    aggregation_key: "host"
+    query_key: "host"
+    filter:
+      - query:
+          query_string:
+            query: "name: rum-worker-logs AND message: \"Could not index event to Elasticsearch\""
+    alert_subject: 'Noticed RUM event indexing error'
+    alerta_severity: critical
+    alerta_environment: haystack
+    include: ["message", "product","host","group", "name"]

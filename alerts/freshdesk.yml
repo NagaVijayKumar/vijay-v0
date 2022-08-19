@@ -1,0 +1,21 @@
+alert_params:
+  "keda_errors":
+    type: any
+    index: freshdesk*
+    aggregation:
+      minutes: 15
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name:"keda-operator" OR kubernetes.container.name:"keda-metrics-apiserver") AND (message:\"error\"= AND NOT message:"http2: stream closed")'
+    alert_subject: "keda_errors"
+    alerta_environment: freshworks-edge
+    include:
+      - kubernetes.container.name
+      - kubernetes.namespace
+      - cloud.region
+      - time
+      - level
+      - msg
+      - error
+      - k8s-cluster

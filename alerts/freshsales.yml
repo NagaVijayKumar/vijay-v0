@@ -1,0 +1,49 @@
+alert_params:
+  "signup":
+    type: frequency
+    num_events: 5
+    index: freshsales*
+    top_count_keys:
+    - method
+    filter:
+      - query:
+           query_string:
+              query: 'message: \"controller=FdMultitenant::AccountsController, action=create_aloha_v2\" AND (message: \"status=500\" OR message: \"status=501\" OR message: \"status=502\" OR message: \"status=503\")'
+    alert_subject: 'noticed 500 responses in the last minute for freshsales signup requests'
+    alerta_severity: critical
+    timeframe:
+      hours: 1
+    include: ["message", "product", "host", "layer", "group", "name"]
+    alerta_environment: freshsales
+
+  "dedupe_unusual_shut_down":
+    alert_subject: "Unusual shut down of Dedupe application "
+    type: frequency
+    index: "freshsales*"
+    num_events: 4
+    timeframe:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: "name: fsales_dedupe_log AND message: Shutting down "
+    alerta_tags: []
+    alerta_severity: critical
+    alerta_environment: freshsales
+    forget_keys: true
+    
+  "account_dedupe_unusual_shut_down":
+    alert_subject: "Unusual shut down of Account Dedupe application "
+    type: frequency
+    index: "freshsales*"
+    num_events: 4
+    timeframe:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: "name: fsales_account_dedupe_log AND message: Shutting down "
+    alerta_tags: []
+    alerta_severity: critical
+    alerta_environment: freshsales
+    forget_keys: true

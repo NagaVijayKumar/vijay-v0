@@ -1,0 +1,116 @@
+alert_params:
+  "500_status_code":
+        type: any
+        index: freshworks-search*
+        include: ["message", "product", "host", "layer", "group", "name"]
+        query_key: host
+        aggregation:
+          minutes: 1
+        filter:
+        - query:
+            query_string:
+               query: "name: access_log AND status: 500 AND d:<50000"
+        alert_subject: "500 response/s noticed "
+        alerta_severity: major
+        alerta_environment: freshworks-search
+  "search_splitter":
+        type: any
+        index: freshworks-search*
+        alert_subject: "Kinesis Exception  "
+        include: ["message", "product", "host", "layer", "group", "name"]
+        query_key: host
+        aggregation:
+          minutes: 1
+        filter:
+        - query:
+            query_string:
+               query: "com.amazonaws.services.kinesis.model.ProvisionedThroughputExceededException"
+        alerta_severity: critical
+        alerta_environment: freshworks-search
+  "logstash_error":
+        type: any
+        index: freshworks-search*
+        include: ["message", "product", "host", "layer", "group", "name"]
+        query_key: host
+        aggregation:
+          minutes: 1
+        filter:
+        - query:
+            query_string:
+               query: "host:worker* AND name:error_log AND -\"HostUnreachableError\" AND  -\"version_conflict_engine_exception\" AND -\"instance doesn't hold the lease for this shard\" AND -\"Restored connection to ES instance\" AND -\"[DEBUG]\""
+        alert_subject: "Logstash Error noticed"
+        alerta_severity: critical
+        alerta_environment: freshworks-search
+  "account_scoped_feature_error":
+        type: any
+        index: freshworks-search*
+        include: ["message", "product", "host", "layer", "group", "name"]
+        query_key: host
+        aggregation:
+          minutes: 1
+        filter:
+        - query:
+            query_string:
+               query: "\"[ERROR]\" AND \"Account-Scoped Feature Not Enabled For Account-Scoped index\""
+        alert_subject: "Account-scoped feature Error noticed"
+        alerta_severity: critical
+        alerta_environment: freshworks-search
+  "timeout_error":
+        type: any
+        index: freshworks-search*
+        include: ["message", "product", "host", "layer", "group", "name"]
+        query_key: host
+        aggregation:
+          minutes: 1
+        filter:
+        - query:
+            query_string:
+               query: "name: access_log AND status: 500 AND d:>50000"
+        alert_subject: "ES timeout error noticed "
+        alerta_severity: major
+        alerta_environment: freshworks-search
+  "4xx_status_codes":
+        type: frequency
+        index: freshworks-search*
+        include: ["message", "product", "host", "layer", "group", "name"]
+        query_key: host
+        num_events: 500
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+               query: "name: access_log AND status: [400 TO 499]"
+        alert_subject: "4XX's count reached above 500 in last 5mins"
+        alerta_severity: major
+        alerta_environment: freshworks-search
+  "ALB_5xx_status_codes":
+        type: any
+        index: lb-freshworks-search*
+        include: ["message", "product", "host", "layer", "group", "name"]
+        query_key: host
+        aggregation:
+          minutes: 1
+        filter:
+        - query:
+            query_string:
+               query: "alb_status_code: [500 TO 599] AND target_status_code: \"-\""
+        alert_subject: "5XX's response noticed at ALB side"
+        alerta_severity: major
+        alerta_environment: freshworks-search
+  "crawler_indexing_failed":
+    type: frequency
+    num_events: 1
+    index: freshworks-search*
+    top_count_keys:
+      - passed
+    filter:
+      - query:
+          query_string:
+            query: "name: crawler_log AND passed: 0"
+    alert_subject: "alerting on crawler indexing failing"
+    include: ["message", "product", "host", "layer", "group", "name"]
+    timeframe:
+      hours: 24
+    alerta_severity: critical
+    alerta_environment: freshworks-search

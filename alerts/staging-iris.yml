@@ -1,0 +1,817 @@
+alert_params:
+  "kafka_consumer_close": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "KAFKA CONSUMER CLOSE"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "KAFKA_CONSUMER_CLOSE"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+  
+  "kafka_consumer_crash": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "KAFKA CONSUMER CRASH"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "KAFKA_CONSUMER_CRASH"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "flight_kafka_consumer_close": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "FLIGHT KAFKA CONSUMER CLOSE"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "FLIGHT_KAFKA_CONSUMER_CLOSE"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "flight_kafka_consumer_crash": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "FLIGHT KAFKA CONSUMER CRASH"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "KAFKA_CONSUMER_CRASH"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "flight_kafka_consumer_pipe_configs_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "FLIGHT KAFKA CONSUMER PIPE CONFIGS ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "FLIGHT_KAFKA_CONSUMER_PIPE_CONFIGS_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "flight_prometheus_server_failure": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "FLIGHT PROMETHEUS SERVER FAILURE"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "Starting_HttpServeFailer"'
+        alerta_severity: warning
+        alerta_environment: staging-iris
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "flight_kafka_subscribe_topic_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "FLIGHT KAFKA CONSUMER SUBSCRIBE TOPICS ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "FLIGHT_KAFKA_CONSUMER_SUBSCRIBE_TOPICS_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "flight_caught_signal_terminating": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "FLIGHT CAUGHT SIGNAL TERMINATING"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "FLIGHT_CAUGHT_SIGNAL_TERMINATING"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "flight_kafka_consumer_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "FLIGHT KAFKA CONSUMER ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "FLIGHT_KAFKA_CONSUMER_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "mysql_init_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "MYSQL INIT ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "MYSQL_INIT_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "masla_mysql_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 10
+        alert_subject: "MASLA MYSQL ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "MASLA_MYSQL_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "mysql_client_close_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 50
+        alert_subject: "MYSQL CLIENT CLOSE ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "MYSQL_CLIENT_CLOSE_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "mysql_master_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "MYSQL MASTER ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "MYSQL_MASTER_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "mysql_slave_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 50
+        alert_subject: "MYSQL SLAVE ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "MYSQL_SLAVE_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "failed_to_get_shard_id_for_account_and_service": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 50
+        alert_subject: "Failed To Get Shard Id For Account And Service"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "Failed to get Shard Id for account and service"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "failed_to_create_shard_connection": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 20
+        alert_subject: "Failed To Create Shard Connection"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "Failed to create shard connection"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "failed_to_get_node_details_for_shard": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 20
+        alert_subject: "Failed To Get Node Details For Shard"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "Failed to get node details for shard"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "failed_to_create_shard_slave_connection": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 10
+        alert_subject: "Failed To Create Shard Slave Connection"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "Failed to create shard slave connection"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "redis_set_key_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 20
+        alert_subject: "REDIS SET KEY ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "REDIS_SET_KEY_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "init_redis_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "INIT REDIS ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "INIT_REDIS_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "redis_key_exists_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 20
+        alert_subject: "REDIS KEY EXISTS ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "REDIS_KEY_EXISTS_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "logger_initialize_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "LOGGER INITIALIZE ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "LOGGER_INITIALIZE_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "delight_logger_initialize_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "DELIGHT LOGGER INITIALIZE ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "DELIGHT_LOGGER_INITIALIZE_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "kafka_consumer_init_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "KAFKA CONSUMER INIT ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "KAFKA_CONSUMER_INIT_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "kafka_get_all_services_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "KAFKA GET ALL SERVICES ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "KAFKA_GET_ALL_SERVICES_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "kafka_get_bundle_products_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "KAFKA GET BUNDLE PRODUCTS ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "KAFKA_GET_BUNDLE_PRODUCTS_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "kafka_get_kafka_virtual_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "KAFKA GET KAFKA VIRTUAL ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "KAFKA_GET_KAFKA_VIRTUAL_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "kafka_get_snooze_products_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "KAFKA GET SNOOZE PRODUCTS ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "KAFKA_GET_SNOOZE_PRODUCTS_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "kafka_get_category_products_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "KAFKA GET CATEGORY PRODUCTS ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "KAFKA_GET_CATEGORY_PRODUCTS_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "kafka_populate_rules_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "KAFKA POPULATE RULES ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "KAFKA_POPULATE_RULES_ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "init_ratelimit_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 5
+        alert_subject: "INIT RATELIMIT ERROR"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "INIT RATELIMIT ERROR"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "invalid_mysql_connection": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 50
+        alert_subject: "Invalid MYSQL Connection"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'error: "invalid connection"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "mysql_1205_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 20
+        alert_subject: "Error 1205 Lock Wait Timeout"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'error: "Error 1205: Lock wait timeout exceeded; try restarting transaction"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "mysql_1213_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 20
+        alert_subject: "Error 1212: MYSQL DeadLock found"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'error: "Error 1213: Deadlock found when trying to get lock; try restarting transaction"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "fcm_message_too_big": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 20
+        alert_subject: "FCM Message Too Big"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "FCM Error" AND error: "MessageTooBig"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+      
+  "fcm_internal_server_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 20
+        alert_subject: "FCM Internal Server Error"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "FCM Error" AND error: "InternalServerError"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "fcm_mismatch_sender_id": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 50
+        alert_subject: "FCM Mismatch Sender Id"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "FCM Error" AND error: "MismatchSenderId"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "fcm_missing_registration": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 20
+        alert_subject: "FCM Missing Registration"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "FCM Error" AND error: "MissingRegistration"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "fcm_unidentified_error": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 10
+        alert_subject: "FCM UnIdentified Error"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "FCM Error" AND NOT error: "MessageTooBig" AND NOT error: "MissingRegistration" AND NOT error: "MismatchSenderId" AND NOT error: "InternalServerError"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "apn_message_too_big": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 50
+        alert_subject: "APN Message Too Big"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "APN Error" AND reason: "PayloadTooLarge"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "apn_bad_device_token": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 20
+        alert_subject: "APN Bad Device Token"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "APN Error" AND reason: "BadDeviceToken"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "apn_unregistered": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 50
+        alert_subject: "APN Unregistered"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "APN Error" AND reason: "Unregistered"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false
+
+  "apn_topic_disallowed": #this field becomes the rule name and rest all fields which are under this form the rule content
+        type: frequency
+        index: staging-iris*
+        num_events: 50
+        alert_subject: "APN TopicDisallowed"
+        timeframe:
+          minutes: 5
+        filter:
+        - query:
+            query_string:
+              query: 'msg: "APN Error" AND reason: "TopicDisallowed"'
+        alerta_severity: warning
+        top_count_keys: ["host","layer","name","group","product"]
+        alerta_tags: []    
+        alerta_environment: staging-iris
+        use_count_query: true
+        forget_keys: true
+        raw_count_keys: false

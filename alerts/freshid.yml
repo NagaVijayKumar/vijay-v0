@@ -1,0 +1,360 @@
+alert_params:
+  "500_failure":
+    alert_subject: "500 in Activation/ Login/ Reset Password/ Logout - FreshID V2"
+    type: any
+    index: freshid*
+    realert:
+      minutes: 0
+    aggregation:
+      minutes: 1
+    aggregation_key: "host"
+    filter:
+      - query:
+          query_string:
+            query: '(host: byjusclasses.freshworks.com OR westconemea.freshworks.com) AND (path: \/api\/v2\/login OR \/oauth\/token OR \/oauth\/authorize OR \/api\/v2\/users\/-\/hashes\/*\/activate OR \/api\/v2\/users\/reset-password OR \/api\/v2\/users\/-\/hashes\/*\/reset-password OR \/api\/v2\/logout) AND (status: 500) AND (kubernetes.container.name: nginx-ingress-controller)'
+    include: ["message", "product", "host", "group", "name", "cloud.region"]
+    alerta_tags: ["host={host}"]
+    alerta_severity: critical
+    alerta_environment: freshid
+
+  "activation_failure_403_408_499_502_503_504":
+    alert_subject: "User Activation - 403/408/499/502/503/504 - FreshID V2"
+    type: any
+    index: freshid*
+    realert:
+      minutes: 0
+    aggregation:
+      minutes: 1
+    aggregation_key: "host"
+    filter:
+      - query:
+          query_string:
+            query: '(host: byjusclasses.freshworks.com OR westconemea.freshworks.com) AND (path: \/api\/v2\/users\/-\/hashes\/*\/activate) AND (status: 403 OR 408 OR 499 OR 502 OR 503 OR 504) AND (kubernetes.container.name: nginx-ingress-controller)'
+    include: ["message", "product", "host", "group", "name", "cloud.region"]
+    alerta_tags: ["host={host}"]
+    alerta_severity: critical
+    alerta_environment: freshid
+
+  "login_failure_502_503_504":
+    alert_subject: "Login 502/503/504 - FreshID V2"
+    type: frequency
+    index: freshid*
+    num_events: 5
+    timeframe:
+      minutes: 1
+    use_count_query: true
+    top_count_keys: ["host","status","path","cloud.region"]
+    raw_count_keys: false
+    realert:
+      minutes: 0
+    query_key: host
+    filter:
+      - query:
+          query_string:
+            query: '(host: byjusclasses.freshworks.com OR westconemea.freshworks.com) AND (path: \/api\/v2\/login OR \/oauth\/token OR \/oauth\/authorize) AND (status: 502 OR 503 OR 504) AND (kubernetes.container.name: nginx-ingress-controller)'
+    alerta_tags: []
+    alerta_severity: critical
+    alerta_environment: freshid
+
+  "login_failure_403_408_499":
+    alert_subject: "Login 403/408/499 - FreshID V2"
+    type: frequency
+    index: freshid*
+    num_events: 10
+    timeframe:
+      minutes: 1
+    use_count_query: true
+    top_count_keys: ["host","status","path","cloud.region"]
+    raw_count_keys: false
+    realert:
+      minutes: 0
+    query_key: host
+    filter:
+      - query:
+          query_string:
+            query: '(host: byjusclasses.freshworks.com OR westconemea.freshworks.com) AND (path: \/api\/v2\/login OR \/oauth\/token OR \/oauth\/authorize) AND (status: 403 OR 408 OR 499) AND (kubernetes.container.name: nginx-ingress-controller)'
+    alerta_tags: []
+    alerta_severity: critical
+    alerta_environment: freshid
+
+  "reset_password_failure_502_503_504":
+    alert_subject: "Reset Password -  502/503/504 - FreshID V2"
+    type: frequency
+    index: freshid*
+    num_events: 5
+    timeframe:
+      minutes: 1
+    use_count_query: true
+    top_count_keys: ["host","status","path","cloud.region"]
+    raw_count_keys: false
+    realert:
+      minutes: 0
+    query_key: host
+    filter:
+      - query:
+          query_string:
+            query: '(host: byjusclasses.freshworks.com OR westconemea.freshworks.com) AND (path: \/api\/v2\/users\/reset-password OR \/api\/v2\/users\/-\/hashes\/*\/reset-password) AND (status: 502 OR 503 OR 504) AND (kubernetes.container.name: nginx-ingress-controller)'
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+
+  "reset_password_failure_403_408_499":
+    alert_subject: "Reset Password - 403/408/499 - FreshID V2"
+    type: frequency
+    index: freshid*
+    num_events: 10
+    timeframe:
+      minutes: 1
+    use_count_query: true
+    top_count_keys: ["host","status","path","cloud.region"]
+    raw_count_keys: false
+    realert:
+      minutes: 0
+    query_key: host
+    filter:
+      - query:
+          query_string:
+            query: '(host: byjusclasses.freshworks.com OR westconemea.freshworks.com) AND (path: \/api\/v2\/users\/reset-password OR \/api\/v2\/users\/-\/hashes\/*\/reset-password) AND (status: 403 OR 408 OR 499) AND (kubernetes.container.name: nginx-ingress-controller)'
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+
+  "session_logout_failure_404_org_domain_change":
+    alert_subject: "404 in session/logout - Organization domain change - FreshID V2"
+    type: frequency
+    index: freshid*
+    num_events: 5
+    timeframe:
+      minutes: 1
+    use_count_query: true
+    top_count_keys: ["path","cloud.region"]
+    raw_count_keys: false
+    realert:
+      minutes: 0
+    query_key: host
+    filter:
+      - query:
+          query_string:
+            query: '(host: byjusclasses.freshworks.com OR westconemea.freshworks.com) AND (path: \/api\/v2\/logout OR \/api\/v2\/session) AND (status: 404) AND (kubernetes.container.name: nginx-ingress-controller)'
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+
+
+  "logout_failure_502_503_504":
+    alert_subject: "Logout 502/503/504 - FreshID V2"
+    type: frequency
+    index: freshid*
+    num_events: 5
+    timeframe:
+      minutes: 1
+    use_count_query: true
+    top_count_keys: ["host","status","path","cloud.region"]
+    raw_count_keys: false
+    realert:
+      minutes: 0
+    query_key: host
+    filter:
+      - query:
+          query_string:
+            query: '(host: byjusclasses.freshworks.com OR westconemea.freshworks.com) AND (path: \/api\/v2\/logout) AND (status: 502 OR 503 OR 504) AND (kubernetes.container.name: nginx-ingress-controller)'
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+
+  "logout_failure_403_408_499":
+    alert_subject: "Logout 403/408/499 - FreshID V2"
+    type: frequency
+    index: freshid*
+    num_events: 10
+    timeframe:
+      minutes: 1
+    use_count_query: true
+    top_count_keys: ["host","status","path","cloud.region"]
+    raw_count_keys: false
+    realert:
+      minutes: 0
+    query_key: host
+    filter:
+      - query:
+          query_string:
+            query: '(host: byjusclasses.freshworks.com OR westconemea.freshworks.com) AND (path: \/api\/v2\/logout) AND (status: 403 OR 408 OR 499) AND (kubernetes.container.name: nginx-ingress-controller)'
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+
+  "usermanagementfchat_fwcrm":
+    type: any
+    index: freshid*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query:  '((kubernetes.container.name: usermanagement-backend) AND ((msg: error*freshchat.com* AND lgr: *ProductApiUtil*) OR (msg: error*freshchat.com* AND lgr:*UserRolesServiceImpl*)))'
+    alert_subject: "FWCRM Usermanagement Failure Product : Freshchat"
+    include: [ "message", "msg", "cloud.region", "lvl" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+
+  "usermanagementfmarketer_fwcrm":
+    type: any
+    index: freshid*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query:  '((kubernetes.container.name: usermanagement-backend) AND ((msg: error*freshmarketer.com* AND lgr: *ProductApiUtil*) OR (msg: error*freshmarketer.com* AND lgr:*UserRolesServiceImpl*)))'
+    alert_subject: "FWCRM Usermanagement Failure Product : Freshmarketer"
+    include: [ "message", "msg", "cloud.region", "lvl" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+
+  "usermanagementfsales_fwcrm":
+    type: any
+    index: freshid*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query:  '((kubernetes.container.name: usermanagement-backend) AND ((msg: error*freshsales.io* AND lgr: *ProductApiUtil*) OR (msg: error*freshsales.io* AND lgr:*UserRolesServiceImpl*)))'
+    alert_subject: "FWCRM Usermanagement Failure Product : Freshsales"
+    include: [ "message", "msg", "cloud.region", "lvl" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+
+  "usermanagementfcaller_fwcrm":
+    type: any
+    index: freshid*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query:  '((kubernetes.container.name: usermanagement-backend) AND ((msg: error*freshcaller.com* AND lgr: *ProductApiUtil*) OR (msg: error*freshcaller.com* AND lgr:*UserRolesServiceImpl*)))'
+    alert_subject: "FWCRM Usermanagement Failure Product : Freshcaller"
+    include: [ "message", "msg", "cloud.region", "lvl" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+
+  "alohafcaller_fwcrm":
+    type: any
+    index: freshid*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: (kubernetes.container.name:orc-backend) AND “/v2/signup/bundle/sales360”  AND "https://signup.freshcaller.com/aloha_signup" NOT  "https://signup.freshcaller.com/aloha_signup | 200 |"
+    alert_subject: "FWCRM Aloha Failure Product : Freshcaller"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+
+  "alohafchat_fwcrm":
+    type: any
+    index: freshid*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: (kubernetes.container.name:orc-backend) AND “/v2/signup/bundle/sales360”  AND "https://web.freshchat.com/app/v2/signup/unity_signup " NOT "https://web.freshchat.com/app/v2/signup/unity_signup | 200 |"
+    alert_subject: "FWCRM Aloha Failure Product : Freshchat"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+
+  "alohafmarketer_fwcrm":
+    type: any
+    index: freshid*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: (kubernetes.container.name:orc-backend) AND “/v2/signup/bundle/sales360”  AND "https://app.freshmarketer.com/accounts/api/signup/v2 " NOT "https://app.freshmarketer.com/accounts/api/signup/v2 | 200 |"
+    alert_subject: "FWCRM Aloha Failure Product : Freshmarketer"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+
+  "alohafsales_fwcrm":
+    type: any
+    index: freshid*
+    query_key: kubernetes.container.name
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: (kubernetes.container.name:orc-backend) AND “/v2/signup/bundle/sales360”  AND "https://login.freshsales.io/signup_v2" NOT "https://login.freshsales.io/signup_v2 | 200 |" NOT "https://login.freshsales.io/signup_v2 | 422 |"
+    alert_subject: "FWCRM Aloha Failure Product : Freshsales"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+
+  "account_bundle_transfer_failures":
+    type: any
+    index: freshid*
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name: gateway-backend) AND (lgr: com.freshworks.account.impl.AccountTransferServiceImpl) AND (msg: *is FAILED)'
+    alert_subject: "Account/Bundle transfer failure"
+    include: ["message", "msg", "lgr", "time", "cloud.region"]
+    alerta_tags: []
+    alerta_severity: major
+    alerta_environment: freshid
+
+  "redis_command_timeout_failure":
+    type: frequency
+    index: freshid*
+    query_key: kubernetes.container.name
+    num_events: 1
+    use_count_query: true
+    timeframe:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+            query: (kubernetes.container.name:orc-backend) AND ("There was a problem while pushing EVENT to redis" OR "Command timed out")
+    alert_subject: "Aloha redis command timeout exception"
+    include: [ "message", "cloud.region", "time" ]
+    alerta_severity: major
+    alerta_environment: freshid
+
+  "email_service_connection_failed":
+    type: frequency
+    num_events: 100
+    index: freshid*
+    timeframe:
+      minutes: 5
+    filter:
+      - query:
+          query_string:
+            query: '(kubernetes.container.name: email-backend) AND (lgr: com.freshworks.emailservice.EmailServiceImpl) AND (msg: *Mail server connection failed*)'
+    alert_subject: "Mail server connection failed"
+    include: [ "message", "msg", "lgr", "time", "cloud.region" ]
+    alerta_tags: []
+    alerta_severity: critical
+    alerta_environment: freshid

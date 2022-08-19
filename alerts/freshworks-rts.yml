@@ -1,0 +1,14 @@
+alert_params:
+  "jwt_time_sync_error":  
+      type: frequency
+      num_events: 1
+      index: freshworks-rts*
+      timeframe:
+        minutes: 1
+      filter:
+      - query:
+          query_string:
+             query: 'message:"Token used before issued"'
+      alert_subject: "JWT time sync error"
+      alerta_severity: critical
+      alerta_environment: freshworks-rts

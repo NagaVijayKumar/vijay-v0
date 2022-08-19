@@ -1,0 +1,184 @@
+alert_params:
+  "too_many_5xx":
+    type: frequency
+    num_events: 50
+    index: freshmarketer*
+    use_count_query: true
+    filter:
+      - query:
+          query_string:
+            query: 'status: [500 TO 599] AND NOT "/segmentio"'
+    alert_subject: Noticed 5xx errors in the last 5 minutes
+    timeframe:
+      minutes: 5
+    alerta_severity: critical
+    alerta_environment: freshmarketer
+
+  "central_connectivity_error":
+    type: frequency
+    num_events: 1
+    index: freshmarketer*
+    use_count_query: true
+    filter:
+      - query:
+          query_string:
+            query: 'message: "Sending message to central failed"'
+    alert_subject: Noticed failure in message sending to central.
+    timeframe:
+      minutes: 1
+    alerta_severity: critical
+    alerta_environment: freshmarketer
+
+  "email_activity_failed":
+    type: frequency
+    num_events: 1
+    index: freshmarketer*
+    use_count_query: true
+    filter:
+      - query:
+          query_string:
+            query: 'message: "Error in saving email activity"'
+    alert_subject: Noticed exception in storing in email activity
+    timeframe:
+      minutes: 1
+    alerta_severity: critical
+    alerta_environment: freshmarketer
+
+  "campaign_sending_failed":
+    type: "frequency"
+    num_events: 1
+    index: freshmarketer*
+    use_count_query: true
+    filter:
+      - query:
+          query_string:
+            query: 'message: "Campaign request to mail service failed"'
+    alert_subject: Noticed failure in mail service campaign api
+    timeframe:
+      minutes: 1
+    alerta_severity: critical
+    alerta_environment: freshmarketer
+
+  "search_service_failed":
+    type: frequency
+    num_events: 1
+    index: freshmarketer*
+    use_count_query: true
+    filter:
+      - query:
+          query_string:
+            query: 'message: "Search request failed"'
+    alert_subject: Noticed problem in search service
+    timeframe:
+      minutes: 1
+    alerta_severity: critical
+    alerta_environment: freshmarketer
+
+  "elasticsearch_health_issue":
+    type: frequency
+    num_events: 1
+    index: freshmarketer*
+    use_count_query: true
+    filter:
+      - query:
+          query_string:
+            query: 'message:"ElasticsearchStatusException"'
+    alert_subject: Noticed problem in elastic search
+    timeframe:
+      minutes: 1
+    alerta_severity: critical
+    alerta_environment: freshmarketer
+
+  "request_too_long_to_respond":
+    type: frequency
+    num_events: 10
+    index: freshmarketer*
+    use_count_query: true
+    filter:
+      - query:
+          query_string:
+            query: 'time_taken:>10000'
+    alert_subject: Request taking too much time to respond
+    timeframe:
+      minutes: 1
+    alerta_severity: critical
+    alerta_environment: freshmarketer
+
+  "signup_request_failure":
+    type: frequency
+    num_events: 1
+    index: freshmarketer*
+    use_count_query: true
+    filter:
+      - query:
+          query_string:
+            query: 'path:"/mas/api/v1/signup" AND NOT status:[200 TO 299]'
+    alert_subject: Bundle Signup Request Failed
+    timeframe:
+      minutes: 1
+    alerta_severity: critical
+    alerta_environment: freshmarketer
+
+  "ufx_request_failure":
+    type: frequency
+    num_events: 1
+    index: freshmarketer*
+    use_count_query: true
+    filter:
+      - query:
+          query_string:
+            query: 'path:*users* AND NOT status:[200 TO 299]'
+    alert_subject: UFX Request Failed
+    timeframe:
+      minutes: 1
+    alerta_severity: critical
+    alerta_environment: freshmarketer
+
+  "rbac_request_failure":
+    type: frequency
+    num_events: 1
+    index: freshmarketer*
+    use_count_query: true
+    filter:
+      - query:
+        query_string:
+          query: 'path:*rbacs* AND NOT status:[200 TO 299]'
+    alert_subject: Rbac Request Failed
+    timeframe:
+      minutes: 1
+    alerta_severity: critical
+    alerta_environment: freshmarketer
+
+  "campaigns_pricing_endpoint_failure":
+      type: frequency
+      num_events: 1
+      index: freshmarketer*
+      use_count_query: true
+      filter:
+        - query:
+            query_string:
+              query: 'path:"/mas/api/v1/campaigns_consumption" AND NOT status:[200 TO 299]'
+      alert_subject: Campaigns Consumption API Request Failed
+      timeframe:
+        minutes: 1
+      alerta_severity: critical
+      alerta_environment: freshmarketer
+
+  "domain_verification_failed":
+    type: frequency
+    num_events: 1
+    index: freshmarketer*
+    filter:
+      - query:
+          query_string:
+            query: 'path:"/mas/api/v1/domains" AND NOT status: [200 TO 299]'
+    alert_subject: Domain Verification Request Failed
+    timeframe:
+      minutes: 1
+    alerta_severity: critical
+    alerta_environment: freshmarketer
+
+
+
+
+    

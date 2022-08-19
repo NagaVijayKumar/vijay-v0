@@ -1,0 +1,558 @@
+alert_params:
+  "fs_forecasting_error":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+      - query:
+          query_string:
+             query: "name: fs_forecasting_log AND message: \"ERROR\" "
+    alert_subject: "Error - Forecasting"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+  
+  "lead_scoring_monit_resource_matched":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freshsales_lead_scoring_monit_log AND message: \"matches resource limit\" "
+    alert_subject: "Lead Scoring Monit- memory Limit matched"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "freddy_db_monit_resource_matched":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freddy_db_monit_log AND message: \"matches resource limit\" "
+    alert_subject: "Freddy DB Monit - memory Limit matched"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "lead_scoring_monit_doesnt_exist":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freshsales_lead_scoring_monit_log AND message: \"process is not running\" "
+    alert_subject: "Lead Scoring Monit - worker doesnt Exist"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "freddy_db_monit_doesnt_exist":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freddy_db_monit_log AND message: \"process is not running\" "
+    alert_subject: "Freddy DB Monit - worker doesnt Exist"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "lead_scoring_monit_not_monitored":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freshsales_lead_scoring_monit_log AND message: \"Shutting down monit HTTP server\" "
+    alert_subject: "Lead Scoring Monit - worker not monitored"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "freddy_db_monit_not_monitored":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freddy_db_monit_log AND message: \"Shutting down monit HTTP server\" "
+    alert_subject: "Freddy DB Monit - worker not monitored"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+  
+  "lead_scoring_lock_wait_timeout":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freshsales_lead_scoring_log AND message: \"Lock wait timeout exceeded\" "
+    alert_subject: "Lead Scoring Lock Wait Timeout"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "freddy_db_lock_wait_timeout":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freddy_db_log AND message: \"Lock wait timeout exceeded\" "
+    alert_subject: "Freddy DB Lock Wait Timeout"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+  
+  "lead_scoring_deadlock":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freshsales_lead_scoring_log AND message: \"Deadlock found when trying to get lock\" "
+    alert_subject: "Lead Scoring Deadlock in DB"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "freddy_db_deadlock":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freddy_db_log AND message: \"Deadlock found when trying to get lock\" "
+    alert_subject: "Freddy DB Deadlock in DB"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+  
+  "lead_scoring_rollback_required":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freshsales_lead_scoring_log AND message: \"To begin a new transaction with this Session, first issue Session.rollback()\" "
+    alert_subject: "Lead Scoring rollback_required"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "freddy_db_rollback_required":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freddy_db_log AND message: \"To begin a new transaction with this Session, first issue Session.rollback()\" "
+    alert_subject: "Freddy DB rollback_required"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "lead_scoring_broker_transport_failure":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freshsales_lead_scoring_log AND message: \"FindCoordinator response error: Local: Broker transport failure\" "
+    alert_subject: "Lead Scoring Kafka Broker transport failure"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "freddy_db_broker_transport_failure":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freddy_db_log AND message: \"FindCoordinator response error: Local: Broker transport failure\" "
+    alert_subject: "Freddy DB Kafka Broker transport failure"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "lead_scoring_mysql_away":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freshsales_lead_scoring_log AND message: \"MySQL server has gone away\" "
+    alert_subject: "Lead Scoring MySQL server has gone away"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "freddy_db_mysql_away":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freddy_db_log AND message: \"MySQL server has gone away\" "
+    alert_subject: "Freddy DB MySQL server has gone away"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "lead_scoring_retries_exhaused":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freshsales_lead_scoring_log AND message: \"All retries exhausted\" "
+    alert_subject: "Lead Scoring retries exhausted in DB"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "freddy_db_retries_exhaused":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freddy_db_log AND message: \"All retries exhausted\" "
+    alert_subject: "Freddy DB retries exhausted in DB"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "lead_scoring_commit_failed":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freshsales_lead_scoring_log AND message: \"DB session commit failed\" "
+    alert_subject: "Lead Scoring DB session commit failed"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "freddy_db_commit_failed":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freddy_db_log AND message: \"DB session commit failed\" "
+    alert_subject: "Freddy DB  session commit failed"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "lead_scoring_model_error":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freshsales_lead_scoring_log AND message: \"An error occurred (ModelError) when calling the InvokeEndpoint operation\" "
+    alert_subject: "Lead Scoring Model Error"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "lead_scoring_general_exception":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freshsales_lead_scoring_log AND message: \"Caught a general exception\" "
+    alert_subject: "Lead Scoring General Exception"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+  
+  "freddy_db_general_exception":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freddy_db_log AND message: \"Caught a general exception\" "
+    alert_subject: "Freddy DB General Exception"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+  "lead_scoring_inconsistent_db_data":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freshsales_lead_scoring_log AND message: \"Inconsistent DB data error\" AND NOT message: \"Sales_accounts\" "
+    alert_subject: "Lead Scoring Inconsistent DB data"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "email_scoring_monit_resource_matched":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: email_scoring_monit_log AND message: \"matches resource limit\" "
+    alert_subject: "Email Scoring Monit- memory Limit matched"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "email_scoring_monit_doesnt_exist":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: email_scoring_monit_log AND message: \"process is not running\" "
+    alert_subject: "Email Scoring Monit - worker doesnt Exist"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+  
+  "email_scoring_monit_not_monitored":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: email_scoring_monit_log AND message: \"Shutting down monit HTTP server\" "
+    alert_subject: "Email Scoring Monit - worker not monitored"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+  
+  "email_scoring_lock_wait_timeout":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: email_scoring_log AND message: \"Lock wait timeout exceeded\" "
+    alert_subject: "Email Scoring Lock Wait Timeout"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "email_scoring_deadlock":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: email_scoring_log AND message: \"Deadlock found when trying to get lock\" "
+    alert_subject: "Email Scoring Deadlock in DB"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "email_scoring_rollback_required":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: email_scoring_log AND message: \"To begin a new transaction with this Session, first issue Session.rollback()\" "
+    alert_subject: "Email Scoring rollback_required"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "email_scoring_broker_transport_failure":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: email_scoring_log AND message: \"FindCoordinator response error: Local: Broker transport failure\" "
+    alert_subject: "Email Scoring Kafka Broker transport failure"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "email_scoring_mysql_away":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: email_scoring_log AND message: \"MySQL server has gone away\" "
+    alert_subject: "Email Scoring MySQL server has gone away"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+  
+  "email_scoring_retries_exhaused":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: email_scoring_log AND message: \"All retries exhausted\" "
+    alert_subject: "Email Scoring retries exhausted in DB"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "email_scoring_model_error":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: email_scoring_log AND message: \"An error occurred (ModelError) when calling the InvokeEndpoint operation\" "
+    alert_subject: "Email Scoring Model Error"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "email_scoring_general_exception":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: email_scoring_log AND message: \"Caught a general exception\" "
+    alert_subject: "Email Scoring General Exception"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+  
+  "lead_scoring_rows_expiry_cron_exception":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freshsales_lead_scoring_log AND message: \"CRON LOG : Score table old rows removal : Exception caught:\" "
+    alert_subject: "Lead Scoring Scores expiry Cron Exception"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "email_scoring_unprocessed_items":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: email_scoring_log AND message: \"Unprocessed Items exists while deletion\" "
+    alert_subject: "Email Scoring Unprocessed Items "
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+  
+  "email_scoring_inconsistent_data":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: email_scoring_log AND message: \"Email conversation ids are missing in Email_scores table while trying to query\" "
+    alert_subject: "Email Scoring Inconsistent Data "
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+  
+  "lead_scoring_cron_no_old_score_rows_found":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freshsales_lead_scoring_log AND message: \"CRON LOG : Score table old rows removal : No rows older than\" "
+    alert_subject: "Lead Scoring No old score rows found"
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+  
+  "freddy_db_skipping_account_removal_fullcontact":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freddy_db_log AND message: \"Skipping account removal in Fullcontact_details table\" "
+    alert_subject: "Freddy DB Skipping account Removal - Fullcontact_details  "
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+
+  "freddy_db_skipping_account_removal__clearbit":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: freddy_db_log AND message: \"Skipping account removal in Clearbit_details table\" "
+    alert_subject: "Freddy DB Skipping account Removal - Clearbit_details "
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
+  
+  "email_scoring_unicode_decode_error":  
+    type: any
+    index: fsales-freddy*
+    aggregation:
+      minutes: 1
+    filter:
+    - query:
+        query_string:
+           query: "name: email_scoring_log AND message: \"Unicode error\" "
+    alert_subject: "Email Scoring Unicode error "
+    alerta_severity: critical
+    alerta_environment: fsales-freddy
